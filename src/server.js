@@ -1,7 +1,21 @@
-require('dotenv').config();
-import { GraphQLServer } from 'graphql-yoga';
+require("dotenv").config();
+import { GraphQLServer } from "graphql-yoga";
+import { PrismaClient } from "@prisma/client";
 
 const PORT = process.env.PORT || 4000;
+const prisma = new PrismaClient();
+
+// const createUser = async () => {
+//   const user = await prisma.user.create({
+//     data: {
+//       email: "test2@test2.com",
+//       name: "test2 name2",
+//     },
+//   });
+//   console.log(user);
+// };
+
+// // createUser();
 
 const typeDefs = `
     type Query{
@@ -11,7 +25,7 @@ const typeDefs = `
 
 const resolvers = {
   Query: {
-    hello: () => 'Helloo',
+    hello: () => "Helloo",
   },
 };
 
