@@ -1,23 +1,16 @@
-import { prisma } from '../../../../prisma/prismaClient';
+import { prisma } from "../../../../prisma/prismaClient";
 
 export default {
   Mutation: {
     createAccount: async (_, args) => {
-      const {
-        email,
-        name,
-        nickname,
-        bio,
-        avatar = '',
-        loginSecret = '',
-      } = args;
+      const { email, name, nickname, bio, avatar = "", loginCode = "" } = args;
 
       const isExist = await prisma.user.findUnique({
         where: { nickname },
       });
-      console.log('존재하는가? ', isExist);
+
       if (isExist) {
-        throw Error('Same user name or email is already exist');
+        throw Error("Same user name or email is already exist");
       }
 
       const user = await prisma.user.create({
@@ -27,14 +20,14 @@ export default {
           nickname,
           bio,
           avatar,
-          loginSecret,
+          loginCode,
         },
       });
       if (user) {
         console.log(user);
         return true;
       } else {
-        throw Error('Failed to create new user.');
+        throw Error("Failed to create new user.");
       }
     },
   },

@@ -1,15 +1,11 @@
-import './env';
+import "./env";
 // import './passport';
-import schema from './schema';
-import { GraphQLServer } from 'graphql-yoga';
-import { PrismaClient } from '@prisma/client';
+import schema from "./schema";
+import { GraphQLServer } from "graphql-yoga";
 
 const PORT = process.env.PORT || 4000;
-const prisma = new PrismaClient();
-
 const server = new GraphQLServer({
   schema,
-  context: () => prisma,
 });
 
 server.start({ port: PORT }, () =>
