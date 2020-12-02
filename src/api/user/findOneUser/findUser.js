@@ -1,8 +1,15 @@
+import { prisma } from "../../../../prisma/prismaClient";
+
 export default {
   Query: {
     findUser: async (_, args) => {
-      console.log('find user arguments : ', args);
-      return null;
+      const { id } = args;
+
+      return prisma.user.findUnique({
+        where: {
+          id,
+        },
+      });
     },
   },
 };
