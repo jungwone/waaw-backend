@@ -1,4 +1,5 @@
 import sendgrid from "@sendgrid/mail";
+import jwt from "jsonwebtoken";
 
 export const sendMailForLogin = (emailAddress, loginCode) => {
   const email = {
@@ -10,4 +11,8 @@ export const sendMailForLogin = (emailAddress, loginCode) => {
 
   sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
   return sendgrid.send(email);
+};
+
+export const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET);
 };
