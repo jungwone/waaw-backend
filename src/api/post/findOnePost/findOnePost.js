@@ -12,7 +12,9 @@ export default {
           author: true,
         },
       });
-      console.log(post);
+      if (!post) {
+        throw Error("This post is not exist");
+      }
 
       return prisma.post.findUnique({
         where: {
