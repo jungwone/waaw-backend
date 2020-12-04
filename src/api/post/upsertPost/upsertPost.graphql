@@ -1,0 +1,9 @@
+type Mutation {
+  upsertPost(
+    id: Int
+    title: String!
+    content: String!
+    category: Category!
+    open: Boolean!
+  ): Post!
+}

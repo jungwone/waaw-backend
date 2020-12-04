@@ -11,11 +11,33 @@ generator client {
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
-  email     String  @unique
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
   name      String?
-  nickname  String  @unique
+  nickname  String   @unique
   bio       String
   avatar    String?
   loginCode String?
+  posts     Post[]
+  createdAt DateTime @default(now())
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+  category  Category @default(FREE)
+  open      Boolean
+  createdAt DateTime @default(now())
+}
+
+enum Category {
+  POEM
+  NOVEL
+  REVIEW
+  FREE
+  ESSAY
+  RELATIONSHIP
 }
