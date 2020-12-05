@@ -24,7 +24,6 @@ export default {
         },
       });
       if (user) {
-        console.log(user);
         return true;
       } else {
         throw Error("Failed to create new user.");
