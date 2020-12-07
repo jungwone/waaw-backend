@@ -1,7 +1,7 @@
 import multer from "multer";
 import multerS3 from "multer-s3";
 import aws from "aws-sdk";
-import awsS3 from "aws-sdk/clients/s3";
+import { changeFileNameToUpload } from "./utils";
 
 const s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -17,7 +17,8 @@ const upload = multer({
       cb(null, { fieldName: file.fieldname });
     },
     key: function (req, file, cb) {
-      cb(null, Date.now().toString());
+      const fileName = changeFileNameToUpload(file.originalname);
+      cb(null, fileName);
     },
   }),
 });
@@ -25,14 +26,9 @@ const upload = multer({
 export const uploadMiddleware = upload.single("file");
 
 export const uploadController = (req, res) => {
-  const { file } = req;
-  console.log(file);
-};
-
-/*
-export const uploadController = (req, res) => {
   const {
-    file: { location }
+    file: { location },
   } = req;
+  console.log(location);
   res.json({ location });
-};*/
+};

@@ -16,3 +16,13 @@ export const sendMailForLogin = (emailAddress, loginCode) => {
 export const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET);
 };
+
+export const changeFileNameToUpload = (fileName) => {
+  const dotIndex = fileName.lastIndexOf(".");
+  const fileExt = fileName.substring(dotIndex);
+  const pureFileName = fileName.substring(0, dotIndex).replace(/ /g, "");
+  const date = Date.now().toString();
+  const randomString = Math.random().toString(35).substring(2, 17);
+  const newFileName = `${date}-${pureFileName}-${randomString}${fileExt}`;
+  return newFileName;
+};
