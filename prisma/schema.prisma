@@ -1,13 +1,10 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model User {
@@ -18,18 +15,19 @@ model User {
   bio       String
   avatar    String?
   loginCode String?
-  posts     Post[]
   createdAt DateTime @default(now())
+  posts     Post[]
 }
 
 model Post {
   id        Int      @id @default(autoincrement())
   title     String
   content   String
-  author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
-  category  Category @default(FREE)
+  author    User     @relation(fields: [authorId], references: [id])
   open      Boolean
+  category  Category @default(FREE)
+  fileUrl   String?  @default("")
   createdAt DateTime @default(now())
 }
 

@@ -4,7 +4,7 @@ export default {
   Mutation: {
     upsertPost: async (_, args, { request, isAuthenticated }) => {
       isAuthenticated(request);
-      const { id, title, content, category, open } = args;
+      const { id, title, content, category, open, fileUrl } = args;
       const { user } = request;
       const post = await prisma.post.findFirst({ where: { id } });
       if (post && post.authorId !== user.id) {
@@ -18,6 +18,7 @@ export default {
             content,
             category,
             open,
+            fileUrl,
             author: {
               connect: { id: user.id },
             },
@@ -31,6 +32,7 @@ export default {
             content,
             category,
             open,
+            fileUrl,
           },
         });
       } else {

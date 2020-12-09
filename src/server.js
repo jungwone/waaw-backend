@@ -17,6 +17,6 @@ server.express.use(cors());
 server.express.use(authenticateJwt);
 server.express.post("/api/upload", uploadMiddleware, uploadController);
 
-server.start({ port: PORT }, () =>
+server.start({ port: PORT, bodyParserOptions: { limit: "5mb" } }, () =>
   console.log(`Server is running on http://localhost:${PORT}`)
 );

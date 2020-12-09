@@ -12,7 +12,7 @@ const s3 = new aws.S3({
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: "waaw-photo-bucket",
+    bucket: "waaw-photo-bucket/photos",
     metadata: function (req, file, cb) {
       cb(null, { fieldName: file.fieldname });
     },
@@ -27,8 +27,8 @@ export const uploadMiddleware = upload.single("file");
 
 export const uploadController = (req, res) => {
   const {
-    file: { location },
+    file: { key },
   } = req;
-  console.log(location);
-  res.json({ location });
+
+  res.json({ key });
 };

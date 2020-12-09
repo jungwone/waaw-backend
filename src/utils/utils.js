@@ -17,12 +17,21 @@ export const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET);
 };
 
-export const changeFileNameToUpload = (fileName) => {
+export const splitFileNameAndExt = (fileName) => {
   const dotIndex = fileName.lastIndexOf(".");
   const fileExt = fileName.substring(dotIndex);
   const pureFileName = fileName.substring(0, dotIndex).replace(/ /g, "");
+
+  return {
+    fileExt,
+    pureFileName,
+  };
+};
+
+export const changeFileNameToUpload = (fileName) => {
+  const { fileExt, pureFileName } = splitFileNameAndExt(fileName.toLowerCase());
   const date = Date.now().toString();
-  const randomString = Math.random().toString(35).substring(2, 17);
+  const randomString = Math.random().toString(35).substring(2, 10);
   const newFileName = `${date}-${pureFileName}-${randomString}${fileExt}`;
   return newFileName;
 };

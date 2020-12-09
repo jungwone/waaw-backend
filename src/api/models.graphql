@@ -18,6 +18,7 @@ type Post {
   authorId: Int!
   category: Category!
   open: Boolean!
+  fileUrl: String
   createdAt: String!
 }
 
