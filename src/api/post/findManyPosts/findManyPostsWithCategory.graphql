@@ -1,0 +1,3 @@
+type Query {
+  findManyPostsWithCategory(category: Category, skip: Int!, take: Int!): [Post!]
+}
