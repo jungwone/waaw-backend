@@ -3,10 +3,10 @@ import { prisma } from "../../../../prisma/prismaClient";
 export default {
   Query: {
     findOnePost: async (_, args) => {
-      const { id } = args;
+      const { uuid } = args;
       const post = await prisma.post.findUnique({
         where: {
-          id,
+          uuid,
         },
         include: {
           author: true,
@@ -14,16 +14,9 @@ export default {
       });
       if (!post) {
         throw Error("This post is not exist");
+      } else {
+        return post;
       }
-
-      return prisma.post.findUnique({
-        where: {
-          id,
-        },
-        include: {
-          author: true,
-        },
-      });
     },
   },
 };

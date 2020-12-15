@@ -4,13 +4,13 @@ export default {
   Query: {
     findManyPostsWithCategory: async (_, args) => {
       const { category = "", take = 0, skip = 20 } = args;
-
+      console.log("skip : ", skip);
       if (category === "") {
         return prisma.post.findMany({
           skip,
           take,
           orderBy: {
-            createdAt: "asc",
+            createdAt: "desc",
           },
           include: {
             author: true,
@@ -24,7 +24,7 @@ export default {
           skip,
           take,
           orderBy: {
-            createdAt: "asc",
+            createdAt: "desc",
           },
           where: {
             category: { equals: category },

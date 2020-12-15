@@ -3,7 +3,6 @@ import { prisma } from "../../../../prisma/prismaClient";
 export default {
   Query: {
     findUserPosts: async (_, args) => {
-      console.log("오오오오오오오오오오", args);
       const { id, category = "", take = 0, skip = 20 } = args;
 
       if (category === "") {

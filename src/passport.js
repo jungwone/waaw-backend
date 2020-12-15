@@ -10,7 +10,9 @@ const options = {
 // verify가 실행된 후에 authenticate에 user 데이터 전달.
 const verify = async (payload, done) => {
   try {
-    const user = await prisma.user.findUnique({ where: { id: payload.id } });
+    const user = await prisma.user.findUnique({
+      where: { uuid: payload.uuid },
+    });
     if (user) {
       return done(null, user);
     } else {

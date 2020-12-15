@@ -4,14 +4,14 @@ export default {
   Mutation: {
     upsertPost: async (_, args, { request, isAuthenticated }) => {
       isAuthenticated(request);
-      const { id, title, content, category, open, fileUrl } = args;
+      const { id, uuid, title, content, category, open, fileUrl } = args;
       const { user } = request;
-      const post = await prisma.post.findFirst({ where: { id } });
+      const post = await prisma.post.findFirst({ where: { uuid } });
       if (post && post.authorId !== user.id) {
         throw Error("You can't edit this post");
       }
 
-      if (!id) {
+      if (!uuid) {
         return prisma.post.create({
           data: {
             title,
@@ -20,13 +20,13 @@ export default {
             open,
             fileUrl,
             author: {
-              connect: { id: user.id },
+              connect: { uuid: user.uuid },
             },
           },
         });
-      } else if (id === post.id) {
+      } else if (uuid === post.uuid) {
         return prisma.post.update({
-          where: { id },
+          where: { uuid },
           data: {
             title,
             content,

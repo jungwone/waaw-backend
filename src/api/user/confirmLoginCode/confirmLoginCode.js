@@ -15,7 +15,7 @@ export default {
           where: { email },
           data: { loginCode: "" },
         });
-        return generateToken(user.id);
+        return generateToken(user.uuid);
       } else {
         throw Error("Check your login code again.");
       }

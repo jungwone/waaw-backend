@@ -13,8 +13,8 @@ export const sendMailForLogin = (emailAddress, loginCode) => {
   return sendgrid.send(email);
 };
 
-export const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET);
+export const generateToken = (uuid) => {
+  return jwt.sign({ uuid }, process.env.JWT_SECRET);
 };
 
 export const splitFileNameAndExt = (fileName) => {
