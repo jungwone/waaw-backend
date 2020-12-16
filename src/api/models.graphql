@@ -24,6 +24,7 @@ type Post {
   fileUrl: String
   likes: [Like!]
   likeCount: Int!
+  isLiked: Boolean!
   createdAt: String!
 }
 

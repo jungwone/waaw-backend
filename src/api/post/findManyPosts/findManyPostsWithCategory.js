@@ -4,7 +4,7 @@ export default {
   Query: {
     findManyPostsWithCategory: async (_, args) => {
       const { category = "", take = 0, skip = 20 } = args;
-      console.log("skip : ", skip);
+
       if (category === "") {
         return prisma.post.findMany({
           skip,
@@ -13,7 +13,15 @@ export default {
             createdAt: "desc",
           },
           include: {
-            author: true,
+            author: {
+              select: {
+                id: true,
+                uuid: true,
+                nickname: true,
+                avatar: true,
+                intro: true,
+              },
+            },
           },
           where: {
             open: true,

@@ -8,10 +8,28 @@ export default {
         where: {
           uuid,
         },
-        include: {
-          author: true,
+        select: {
+          id: true,
+          uuid: true,
+          title: true,
+          content: true,
+          fileUrl: true,
+          createdAt: true,
+          author: {
+            select: {
+              uuid: true,
+              nickname: true,
+              avatar: true,
+            },
+          },
+          likes: {
+            select: {
+              user: true,
+            },
+          },
         },
       });
+
       if (!post) {
         throw Error("This post is not exist");
       } else {

@@ -3,14 +3,14 @@ import { prisma } from "../../../../prisma/prismaClient";
 export default {
   Query: {
     findUserPosts: async (_, args) => {
-      const { id, category = "", take = 0, skip = 20 } = args;
+      const { id, uuid, category = "", take = 0, skip = 20 } = args;
 
       if (category === "") {
         return prisma.post.findMany({
           skip,
           take,
           where: {
-            authorId: id,
+            authorId: uuid,
           },
           include: {
             author: true,
@@ -24,7 +24,7 @@ export default {
             createdAt: "desc",
           },
           where: {
-            AND: [{ authorId: id }, { category }],
+            AND: [{ authorId: uuid }, { category }],
           },
           include: {
             author: true,
