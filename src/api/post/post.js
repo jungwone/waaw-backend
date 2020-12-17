@@ -10,9 +10,9 @@ export default {
       });
     },
     isLiked: async (parent, _, __) => {
-      const { postId, author } = parent;
+      const { uuid, author } = parent;
       const count = await prisma.like.count({
-        where: { AND: [{ postId }, { userId: author.uuid }] },
+        where: { AND: [{ postId: uuid }, { userId: author.uuid }] },
       });
       if (count === 1) {
         return true;
