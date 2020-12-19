@@ -20,5 +20,12 @@ export default {
         return false;
       }
     },
+    commentCount: async (parent, _, __) => {
+      return prisma.comment.count({
+        where: {
+          postId: parent.uuid,
+        },
+      });
+    },
   },
 };

@@ -8,32 +8,35 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  uuid      String   @unique @default(uuid())
-  email     String   @unique
+  id        Int       @id @default(autoincrement())
+  uuid      String    @unique @default(uuid())
+  email     String    @unique
   name      String?
-  nickname  String   @unique
+  nickname  String    @unique
   bio       String
   avatar    String?
-  intro     String?  @default("")
+  intro     String?   @default("")
   loginCode String?
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
   posts     Post[]
-  Like      Like[]
+  like      Like[]
+  comments  Comment[]
+  replies   Reply[]
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
-  uuid      String   @unique @default(uuid())
+  id        Int       @id @default(autoincrement())
+  uuid      String    @unique @default(uuid())
   title     String
   content   String
   authorId  String
-  author    User     @relation(fields: [authorId], references: [uuid])
+  author    User      @relation(fields: [authorId], references: [uuid])
   open      Boolean
-  category  Category @default(FREE)
-  fileUrl   String?  @default("")
+  category  Category  @default(FREE)
+  fileUrl   String?   @default("")
   likes     Like[]
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
+  comments  Comment[]
 }
 
 model Like {
@@ -41,6 +44,28 @@ model Like {
   user      User     @relation(fields: [userId], references: [uuid])
   post      Post     @relation(fields: [postId], references: [uuid])
   postId    String
+  userId    String
+  createdAt DateTime @default(now())
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique @default(uuid())
+  content   String
+  post      Post     @relation(fields: [postId], references: [uuid])
+  postId    String
+  user      User     @relation(fields: [userId], references: [uuid])
+  userId    String
+  replies   Reply[]
+  createdAt DateTime @default(now())
+}
+
+model Reply {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique @default(uuid())
+  comment   Comment  @relation(fields: [commentId], references: [uuid])
+  commentId String
+  user      User     @relation(fields: [userId], references: [uuid])
   userId    String
   createdAt DateTime @default(now())
 }

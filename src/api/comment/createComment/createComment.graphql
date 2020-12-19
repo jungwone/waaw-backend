@@ -1,0 +1,3 @@
+type Mutation {
+  createComment(content: String!, postId: String!): Comment!
+}

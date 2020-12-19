@@ -25,6 +25,8 @@ type Post {
   likes: [Like!]
   likeCount: Int!
   isLiked: Boolean!
+  comments: [Comment!]
+  commentCount: Int!
   createdAt: String!
 }
 
@@ -34,6 +36,19 @@ type Like {
   post: Post!
   postId: String!
   userId: String!
+  createdAt: String!
+}
+
+type Comment {
+  id: ID!
+  uuid: String!
+  content: String!
+  replies: [Comment!]
+  parentId: String
+  user: User!
+  userId: String!
+  post: Post!
+  postId: String!
   createdAt: String!
 }
 
