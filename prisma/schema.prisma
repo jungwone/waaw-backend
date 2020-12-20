@@ -35,6 +35,7 @@ model Post {
   category  Category  @default(FREE)
   fileUrl   String?   @default("")
   likes     Like[]
+  likeCount Int       @default(0)
   createdAt DateTime  @default(now())
   comments  Comment[]
 }

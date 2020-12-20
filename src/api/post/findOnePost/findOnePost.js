@@ -14,6 +14,7 @@ export default {
           title: true,
           content: true,
           fileUrl: true,
+          likeCount: true,
           createdAt: true,
           author: {
             select: {

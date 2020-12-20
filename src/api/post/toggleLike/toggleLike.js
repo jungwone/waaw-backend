@@ -5,34 +5,44 @@ export default {
     toggleLike: async (_, args, { request, isAuthenticated }) => {
       isAuthenticated(request);
       const { postId } = args; // uuid
-      const { user: userData } = request;
+      const { user } = request;
 
-      const check = await prisma.like.findMany({
-        where: {
-          AND: [{ postId }, { userId: userData.uuid }],
+      const post = await prisma.post.findUnique({
+        where: { uuid: postId },
+        include: {
+          likes: { where: { postId, userId: user.uuid } },
         },
       });
 
-      if (check.length === 0) {
+      // like
+      if (post.likes.length === 0) {
         await prisma.like.create({
           data: {
-            post: {
-              connect: { uuid: postId },
-            },
-            user: {
-              connect: { uuid: userData.uuid },
-            },
+            post: { connect: { uuid: postId } },
+            user: { connect: { uuid: user.uuid } },
           },
+        });
+
+        await prisma.post.update({
+          where: { uuid: postId },
+          data: { likeCount: post.likeCount + 1 },
         });
         return true;
-      } else {
-        const like = check[0];
+      }
+      // Unlike
+      else {
+        const like = post.likes[0];
+        console.log("like : ", like);
+
         await prisma.like.delete({
-          where: {
-            id: like.id,
-          },
+          where: { id: like.id },
         });
       }
+
+      await prisma.post.update({
+        where: { uuid: postId },
+        data: { likeCount: post.likeCount - 1 },
+      });
 
       return false;
     },

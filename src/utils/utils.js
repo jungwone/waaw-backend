@@ -35,3 +35,10 @@ export const changeFileNameToUpload = (fileName) => {
   const newFileName = `${date}-${pureFileName}-${randomString}${fileExt}`;
   return newFileName;
 };
+
+export const getLastWeekDate = () => {
+  let currentDate = new Date();
+  let days = currentDate.getDate();
+  currentDate.setDate(days - 7);
+  return currentDate;
+};
