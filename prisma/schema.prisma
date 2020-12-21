@@ -18,9 +18,9 @@ model User {
   intro     String?   @default("")
   loginCode String?
   createdAt DateTime  @default(now())
-  posts     Post[]
-  like      Like[]
   comments  Comment[]
+  likes     Like[]
+  posts     Post[]
   replies   Reply[]
 }
 
@@ -30,52 +30,43 @@ model Post {
   title     String
   content   String
   authorId  String
-  author    User      @relation(fields: [authorId], references: [uuid])
   open      Boolean
-  category  Category  @default(FREE)
-  fileUrl   String?   @default("")
-  likes     Like[]
-  likeCount Int       @default(0)
+  category  String    @default("essay")
+  thumbnail String?   @default("")
   createdAt DateTime  @default(now())
+  likeCount Int       @default(0)
+  author    User      @relation(fields: [authorId], references: [uuid])
   comments  Comment[]
+  likes     Like[]
 }
 
 model Like {
   id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [uuid])
-  post      Post     @relation(fields: [postId], references: [uuid])
   postId    String
   userId    String
   createdAt DateTime @default(now())
+  post      Post     @relation(fields: [postId], references: [uuid])
+  user      User     @relation(fields: [userId], references: [uuid])
 }
 
 model Comment {
   id        Int      @id @default(autoincrement())
   uuid      String   @unique @default(uuid())
   content   String
-  post      Post     @relation(fields: [postId], references: [uuid])
   postId    String
-  user      User     @relation(fields: [userId], references: [uuid])
-  userId    String
-  replies   Reply[]
   createdAt DateTime @default(now())
+  userId    String
+  post      Post     @relation(fields: [postId], references: [uuid])
+  user      User     @relation(fields: [userId], references: [uuid])
+  replies   Reply[]
 }
 
 model Reply {
   id        Int      @id @default(autoincrement())
   uuid      String   @unique @default(uuid())
-  comment   Comment  @relation(fields: [commentId], references: [uuid])
   commentId String
-  user      User     @relation(fields: [userId], references: [uuid])
   userId    String
   createdAt DateTime @default(now())
-}
-
-enum Category {
-  POEM
-  NOVEL
-  REVIEW
-  FREE
-  ESSAY
-  RELATIONSHIP
+  comment   Comment  @relation(fields: [commentId], references: [uuid])
+  user      User     @relation(fields: [userId], references: [uuid])
 }

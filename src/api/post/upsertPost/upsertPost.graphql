@@ -3,8 +3,8 @@ type Mutation {
     id: Int
     title: String!
     content: String!
-    category: Category!
+    thumbnail: String
+    category: String!
     open: Boolean!
-    fileUrl: String
   ): Post!
 }

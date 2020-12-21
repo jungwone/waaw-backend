@@ -13,7 +13,7 @@ export default {
           uuid: true,
           title: true,
           content: true,
-          fileUrl: true,
+          thumbnail: true,
           likeCount: true,
           createdAt: true,
           author: {

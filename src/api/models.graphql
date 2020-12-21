@@ -19,9 +19,9 @@ type Post {
   content: String!
   author: User!
   authorId: Int!
-  category: Category!
+  category: String!
+  thumbnail: String
   open: Boolean!
-  fileUrl: String
   likes: [Like!]
   likeCount: Int!
   isLiked: Boolean!
@@ -54,9 +54,7 @@ type Comment {
 
 enum Category {
   POEM
-  NOVEL
   REVIEW
   FREE
-  ESSAY
-  RELATIONSHIP
+  DREAM
 }
