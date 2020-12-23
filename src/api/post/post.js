@@ -2,6 +2,14 @@ import { prisma } from "../../../prisma/prismaClient";
 
 export default {
   Post: {
+    totalPostCount: async (parent, _, __) => {
+      const { category } = parent;
+      return prisma.post.count({
+        where: {
+          category,
+        },
+      });
+    },
     isLiked: async (parent, _, __) => {
       const { uuid, author } = parent;
       const count = await prisma.like.count({

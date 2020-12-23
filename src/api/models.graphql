@@ -27,6 +27,7 @@ type Post {
   isLiked: Boolean!
   comments: [Comment!]
   commentCount: Int!
+  totalPostCount: Int
   createdAt: String!
 }
 
@@ -53,8 +54,8 @@ type Comment {
 }
 
 enum Category {
-  POEM
-  REVIEW
-  FREE
-  DREAM
+  poem
+  review
+  essay
+  dream
 }

@@ -9,9 +9,7 @@ export default {
       return prisma.post.findMany({
         skip,
         take,
-        orderBy: {
-          likeCount: "desc",
-        },
+        orderBy: [{ likeCount: "desc" }, { createdAt: "desc" }],
         include: {
           author: {
             select: {
