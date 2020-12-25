@@ -53,6 +53,13 @@ type Comment {
   createdAt: String!
 }
 
+type MyInfo {
+  id: ID!
+  uuid: String!
+  avatar: String!
+  token: String!
+}
+
 enum Category {
   poem
   review

@@ -15,7 +15,16 @@ export default {
           where: { email },
           data: { loginCode: "" },
         });
-        return generateToken(user.uuid);
+
+        const token = generateToken(user.uuid);
+        const myInfo = {
+          token,
+          id: user.id,
+          uuid: user.uuid,
+          avatar: user.avatar,
+        };
+
+        return myInfo;
       } else {
         throw Error("Check your login code again.");
       }
