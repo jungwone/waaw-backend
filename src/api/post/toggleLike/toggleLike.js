@@ -32,7 +32,6 @@ export default {
       // Unlike
       else {
         const like = post.likes[0];
-        console.log("like : ", like);
 
         await prisma.like.delete({
           where: { id: like.id },

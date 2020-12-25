@@ -11,7 +11,7 @@ export default {
           postId,
         },
         include: {
-          replies: true,
+          user: true,
         },
       });
     },

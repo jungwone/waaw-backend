@@ -6,8 +6,6 @@ export default {
       isAuthenticated(request);
       const { postId, content, parentId } = args;
       const { user: userData } = request;
-      console.log(args);
-      console.log(userData);
 
       return prisma.comment.create({
         data: {
