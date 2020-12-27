@@ -9,6 +9,7 @@ export default {
         take,
         where: {
           postId,
+          isDeleted: false,
         },
         include: {
           user: true,

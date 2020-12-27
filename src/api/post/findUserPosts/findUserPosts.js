@@ -11,6 +11,7 @@ export default {
           take,
           where: {
             authorId: uuid,
+            isDeleted: false,
           },
           include: {
             author: true,

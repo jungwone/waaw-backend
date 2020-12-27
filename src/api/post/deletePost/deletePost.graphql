@@ -1,3 +1,3 @@
 type Mutation {
-  deletePost(uuid: String!): Post!
+  deletePost(postId: String!): Post!
 }

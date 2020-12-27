@@ -4,9 +4,10 @@ export default {
   Query: {
     findOnePost: async (_, args) => {
       const { uuid } = args;
-      const post = await prisma.post.findUnique({
+      const post = await prisma.post.findFirst({
         where: {
           uuid,
+          isDeleted: false,
         },
         select: {
           id: true,

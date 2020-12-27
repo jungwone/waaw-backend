@@ -17,6 +17,7 @@ model User {
   avatar    String?
   intro     String?   @default("")
   loginCode String?
+  isDeleted Boolean   @default(false)
   createdAt DateTime  @default(now())
   comments  Comment[]
   likes     Like[]
@@ -33,6 +34,7 @@ model Post {
   open      Boolean
   category  String    @default("essay")
   thumbnail String?   @default("")
+  isDeleted Boolean   @default(false)
   createdAt DateTime  @default(now())
   likeCount Int       @default(0)
   author    User      @relation(fields: [authorId], references: [uuid])
@@ -54,6 +56,7 @@ model Comment {
   uuid      String   @unique @default(uuid())
   content   String
   postId    String
+  isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())
   userId    String
   post      Post     @relation(fields: [postId], references: [uuid])

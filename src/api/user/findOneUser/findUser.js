@@ -5,9 +5,10 @@ export default {
     findUser: async (_, args) => {
       const { uuid } = args;
 
-      return prisma.user.findUnique({
+      return prisma.user.findFirst({
         where: {
           uuid,
+          isDeleted: false,
         },
       });
     },
