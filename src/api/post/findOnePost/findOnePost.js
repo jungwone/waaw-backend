@@ -15,6 +15,8 @@ export default {
           title: true,
           content: true,
           thumbnail: true,
+          category: true,
+          open: true,
           likeCount: true,
           createdAt: true,
           author: {

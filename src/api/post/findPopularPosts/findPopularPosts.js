@@ -21,6 +21,7 @@ export default {
         },
         where: {
           open: true,
+          isDeleted: false,
           createdAt: {
             gte: getLastWeekDate(),
           },

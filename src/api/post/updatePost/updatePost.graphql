@@ -1,0 +1,10 @@
+type Mutation {
+  updatePost(
+    postId: String!
+    title: String!
+    content: String!
+    thumbnail: String
+    category: String!
+    open: Boolean!
+  ): Post!
+}
