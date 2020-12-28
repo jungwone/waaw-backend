@@ -1,0 +1,8 @@
+type Mutation {
+  updateUser(
+    userId: String!
+    avatar: String
+    intro: String
+    nickname: String
+  ): User!
+}

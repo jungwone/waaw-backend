@@ -9,6 +9,7 @@ type User {
   intro: String
   loginCode: String
   posts: [Post!]
+  postCount: Int!
   createdAt: String!
 }
 
