@@ -32,7 +32,7 @@
   },
   "scripts": {
     "dev": "nodemon --exec babel-node src/server.js",
-    "build": "babel src -d build && npx prisma migrate dev --preview-feature",
+    "build": "babel src -d build && npx prisma introspect",
     "postbuild": "cd src && npx copy ./api/**/*.graphql ../build/api/",
     "start": "node --experimental-modules build/server.js"
   },
