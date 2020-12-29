@@ -7,12 +7,14 @@
   "author": "jungwon",
   "license": "MIT",
   "dependencies": {
+    "@babel/runtime": "^7.12.5",
     "@graphql-tools/load-files": "^6.2.5",
     "@graphql-tools/merge": "^6.2.6",
     "@prisma/cli": "^2.13.0",
     "@prisma/client": "^2.13.0",
     "@sendgrid/mail": "^7.4.0",
     "aws-sdk": "^2.804.0",
+    "copy": "^0.3.2",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "graphql-tools": "^7.0.2",
@@ -25,12 +27,16 @@
     "uuid": "^8.3.1"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js"
+    "dev": "nodemon --exec babel-node src/server.js",
+    "build": "babel src -d build",
+    "postbuild": "cd src && npx copy ./api/**/*.graphql ../build/api/",
+    "start": "babel-node build/server.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",
     "@babel/core": "^7.12.8",
     "@babel/node": "^7.12.6",
+    "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.7",
     "nodemon": "^2.0.6"
   }
