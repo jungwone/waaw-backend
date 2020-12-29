@@ -39,5 +39,6 @@
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.7",
     "nodemon": "^2.0.6"
-  }
+  },
+  "type": "module"
 }
