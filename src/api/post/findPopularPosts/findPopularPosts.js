@@ -1,4 +1,4 @@
-import { prisma } from "../../../../prisma/prismaClient";
+import { prisma } from "../../../prismaClient";
 import { getLastWeekDate } from "../../../utils/utils";
 
 export default {

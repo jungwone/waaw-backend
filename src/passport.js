@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Strategy, ExtractJwt } from "passport-jwt";
-import { prisma } from "../prisma/prismaClient";
+import { prisma } from "./prismaClient";
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

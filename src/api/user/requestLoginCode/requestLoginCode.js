@@ -1,4 +1,4 @@
-import { prisma } from "../../../../prisma/prismaClient";
+import { prisma } from "../../../prismaClient";
 import { v4 as uuidv4 } from "uuid";
 import { sendMailForLogin } from "../../../utils/utils";
 
