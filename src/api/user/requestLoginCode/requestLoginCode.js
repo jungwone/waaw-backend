@@ -8,6 +8,16 @@ export default {
       const { email } = args;
       const loginCode = uuidv4();
 
+      const isSignedUp = await prisma.user.findUnique({
+        where: {
+          email,
+        },
+      });
+
+      if (!isSignedUp) {
+        throw Error("해당 메일로 가입된 유저가 없습니다.");
+      }
+
       try {
         await sendMailForLogin(email, loginCode);
         await prisma.user.update({

@@ -5,8 +5,8 @@ export const sendMailForLogin = (emailAddress, loginCode) => {
   const email = {
     from: "prsjb77@gmail.com",
     to: emailAddress,
-    subject: "🙄 Login Code 🙄",
-    html: `Hello Your login code is <strong>${loginCode}</strong><br/> Copy and paste to login`,
+    subject: "글의 집 로그인 코드입니다 ",
+    html: `로그인 코드는 굵게 표시된 부분입니다.<br/> <strong>${loginCode}</strong><br/> 복사 붙여넣기를 추천드립니다 :)`,
   };
 
   sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
