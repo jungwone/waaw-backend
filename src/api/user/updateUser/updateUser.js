@@ -6,13 +6,13 @@ export default {
       isAuthenticated(request);
       const { userId, avatar, intro, nickname } = args;
 
-      const check = prisma.user.findUnique({
+      const check = await prisma.user.findUnique({
         where: {
           nickname,
         },
       });
 
-      if (check) {
+      if (check && check.uuid !== userId) {
         throw Error("이미 존재하는 닉네임입니다.");
       }
 
