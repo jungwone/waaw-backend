@@ -28,7 +28,7 @@ export default {
           },
           likes: {
             select: {
-              user: true,
+              userId: true,
             },
           },
         },
