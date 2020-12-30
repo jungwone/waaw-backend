@@ -25,6 +25,7 @@ export default {
       return prisma.comment.count({
         where: {
           postId: parent.uuid,
+          isDeleted: false,
         },
       });
     },

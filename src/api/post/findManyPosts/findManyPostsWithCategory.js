@@ -38,6 +38,7 @@ export default {
           where: {
             category: { equals: category },
             open: true,
+            isDeleted: false,
           },
           include: {
             author: true,
