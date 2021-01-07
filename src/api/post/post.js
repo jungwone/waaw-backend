@@ -7,6 +7,7 @@ export default {
       return prisma.post.count({
         where: {
           category,
+          isDeleted:false,
         },
       });
     },
